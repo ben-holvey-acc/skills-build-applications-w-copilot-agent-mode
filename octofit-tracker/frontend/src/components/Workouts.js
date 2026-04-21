@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
-  const apiUrl = `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/workouts/`;
+  const codespaceName = process.env.REACT_APP_CODESPACE_NAME || 'localhost';
+  const apiUrl = codespaceName === 'localhost' 
+    ? 'http://localhost:8000/api/workouts/'
+    : `https://${codespaceName}-8000.app.github.dev/api/workouts/`;
 
   useEffect(() => {
     fetch(apiUrl)

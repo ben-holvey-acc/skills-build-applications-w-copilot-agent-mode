@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 function Users() {
   const [users, setUsers] = useState([]);
-  const apiUrl = `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/users/`;
+  const codespaceName = process.env.REACT_APP_CODESPACE_NAME || 'localhost';
+  const apiUrl = codespaceName === 'localhost' 
+    ? 'http://localhost:8000/api/users/'
+    : `https://${codespaceName}-8000.app.github.dev/api/users/`;
 
   useEffect(() => {
     fetch(apiUrl)

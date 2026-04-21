@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 function Activities() {
   const [activities, setActivities] = useState([]);
-  const apiUrl = `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/activities/`;
+  const codespaceName = process.env.REACT_APP_CODESPACE_NAME || 'localhost';
+  const apiUrl = codespaceName === 'localhost' 
+    ? 'http://localhost:8000/api/activities/'
+    : `https://${codespaceName}-8000.app.github.dev/api/activities/`;
 
   useEffect(() => {
     fetch(apiUrl)
